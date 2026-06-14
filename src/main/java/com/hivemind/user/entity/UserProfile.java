@@ -36,6 +36,12 @@ public class UserProfile
     @Column("profile_picture_url")
     private String profilePictureUrl;
 
+    @Column("cover_picture_url")
+    private String coverPictureUrl;
+
+    @Column("show_contact_info")
+    private Boolean showContactInfo;
+
     @Column("created_at")
     private LocalDate createdAt;
 

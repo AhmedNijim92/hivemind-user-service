@@ -13,4 +13,6 @@ public class UpdateProfileRequest
     private String email;
     private String bio;
     private String profilePictureUrl;
+    private String coverPictureUrl;
+    private Boolean showContactInfo;
 }

@@ -45,6 +45,8 @@ public class UserServiceImpl implements IUserService
         if (request.getEmail() != null) profile.setEmail(request.getEmail());
         if (request.getBio() != null) profile.setBio(request.getBio());
         if (request.getProfilePictureUrl() != null) profile.setProfilePictureUrl(request.getProfilePictureUrl());
+        if (request.getCoverPictureUrl() != null) profile.setCoverPictureUrl(request.getCoverPictureUrl());
+        if (request.getShowContactInfo() != null) profile.setShowContactInfo(request.getShowContactInfo());
         profile.setUpdatedAt(LocalDate.now());
 
         userProfileRepository.save(profile);
@@ -102,6 +104,8 @@ public class UserServiceImpl implements IUserService
                 .email(profile.getEmail())
                 .bio(profile.getBio())
                 .profilePictureUrl(profile.getProfilePictureUrl())
+                .coverPictureUrl(profile.getCoverPictureUrl())
+                .showContactInfo(profile.getShowContactInfo() != null ? profile.getShowContactInfo() : false)
                 .createdAt(profile.getCreatedAt())
                 .build();
     }
