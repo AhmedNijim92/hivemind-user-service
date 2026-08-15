@@ -18,6 +18,12 @@ public class UserController
 {
     private final IUserService userService;
 
+    @GetMapping("/search")
+    public ResponseEntity<List<UserProfileDto>> searchUsers(@RequestParam String q)
+    {
+        return ResponseEntity.ok(userService.searchUsers(q));
+    }
+
     @GetMapping("/{userId}")
     public ResponseEntity<UserProfileDto> getUserById(@PathVariable UUID userId)
     {

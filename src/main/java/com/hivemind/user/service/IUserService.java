@@ -19,4 +19,6 @@ public interface IUserService
     List<UserProfileDto> getFollowers(UUID userId);
 
     List<UserProfileDto> getFollowing(UUID userId);
+
+    List<UserProfileDto> searchUsers(String query);
 }

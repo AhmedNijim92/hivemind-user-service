@@ -95,6 +95,17 @@ public class UserServiceImpl implements IUserService
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<UserProfileDto> searchUsers(String query)
+    {
+        String q = query.toLowerCase();
+        return userProfileRepository.findAll().stream()
+                .filter(p -> (p.getName() != null && p.getName().toLowerCase().contains(q))
+                        || (p.getMobileNumber() != null && p.getMobileNumber().contains(query)))
+                .map(this::toDto)
+                .collect(Collectors.toList());
+    }
+
     private UserProfileDto toDto(UserProfile profile)
     {
         return UserProfileDto.builder()
