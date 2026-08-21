@@ -100,10 +100,23 @@ public class UserServiceImpl implements IUserService
     {
         String q = query.toLowerCase();
         return userProfileRepository.findAll().stream()
-                .filter(p -> (p.getName() != null && p.getName().toLowerCase().contains(q))
-                        || (p.getMobileNumber() != null && p.getMobileNumber().contains(query)))
-                .map(this::toDto)
+                .filter(p -> p.getName() != null && p.getName().toLowerCase().contains(q))
+                .map(this::toSearchDto)
                 .collect(Collectors.toList());
+    }
+
+    /** Returns a DTO without sensitive contact info for search results */
+    private UserProfileDto toSearchDto(UserProfile profile)
+    {
+        return UserProfileDto.builder()
+                .userId(profile.getUserId())
+                .name(profile.getName())
+                .bio(profile.getBio())
+                .profilePictureUrl(profile.getProfilePictureUrl())
+                .coverPictureUrl(profile.getCoverPictureUrl())
+                .showContactInfo(profile.getShowContactInfo() != null ? profile.getShowContactInfo() : false)
+                .createdAt(profile.getCreatedAt())
+                .build();
     }
 
     private UserProfileDto toDto(UserProfile profile)
